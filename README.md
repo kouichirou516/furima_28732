@@ -25,6 +25,12 @@
 | image           | string  | null: false |
 | name            | string  | null: false |
 | description     | string  | null: false |
+| category        | integer | null: false |
+| status          | integer | null: false |
+| price           | integer | null: false |
+| sale_charge     | integer | null: false |
+| shipping_charge | integer | null: false |
+| area            | integer [ null: false |
 | price           | integer | null: false |
 | user_id         | string  | null: false |
 
@@ -50,6 +56,7 @@
 
 | Colum           | Type    | Options     |
 | --------------  | ------- | null: false |
+| purchase        | references | null: false , foreign_key: true |
 | postal_cord     | string  | null: false |
 | city            | string  | null: false |
 | address         | integer | null: false |
