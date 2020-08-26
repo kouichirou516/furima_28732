@@ -31,8 +31,7 @@
 | sale_charge     | integer | null: false |
 | shipping_charge | integer | null: false |
 | area            | integer [ null: false |
-| user_id         | string  | null: false |
-
+| user_id         | integer | null: false , foreign_key: true |
 ### Association
 
 - has_one :purchase
@@ -42,8 +41,8 @@
 
 | Colum           | Type    | Options     |
 | --------------  | ------- | null: false |
-| user_id         | string  | null: false |
-| item_id         | string  | null: false |
+| user_id         | integer | null: false , foreign_key: true |
+| item_id         | integer | null: false , foreign_key: true |
 
 ### Association
 
