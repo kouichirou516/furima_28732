@@ -55,7 +55,7 @@
 
 | Colum           | Type    | Options     |
 | --------------  | ------- | null: false |
-| purchase_id     | references | null: false , foreign_key: true |
+| purchase        | references | null: false , foreign_key: true |
 | Prefectures     | string  | null: false |
 | postal_cord     | string  | null: false |
 | city            | string  | null: false |
