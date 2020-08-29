@@ -61,6 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def new
+
   end
 
 end
