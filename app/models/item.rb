@@ -7,10 +7,10 @@ class Item < ApplicationRecord
   belongs_to_active_hash :area
   belongs_to_active_hash :shipping_time
   #空の投稿を保存できないようにする
-  validates :image, :name, :category, :status, :shipping_charge, :area, :shipping_time, presence: true
+  validates :image, :name, :description, :category_id, :status_id, :shipping_charge_id, :area_id, :shipping_time_id, :price, presence: true
 
   #ジャンルの選択が「--」の時は保存できないようにする
-  validates :category_id, :status_id, :shipping_charge, :area, :shipping_time, numericality: { other_than: 1 }
+  validates :category_id, :status_id, :shipping_charge_id, :area_id, :shipping_time_id, numericality: { other_than: 1 }
 end
 
 
