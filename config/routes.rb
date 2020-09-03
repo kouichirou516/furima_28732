@@ -6,8 +6,6 @@ Rails.application.routes.draw do
 
   # トップページの表示
   root to: 'items#index'
-
-
   resources :items do
   end
   

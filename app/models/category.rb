@@ -1,4 +1,6 @@
 class Category < ActiveHash::Base
+  # extend ActiveHash::Associations::ActiveRecordExtensions
+  # belongs_to_active_hash :item
   self.data = [
    { id: 1, name: '--' },
    { id: 2, name: 'レディース' },
@@ -12,4 +14,3 @@ class Category < ActiveHash::Base
    { id: 10, name: 'その他' }
  ]
  end
-end

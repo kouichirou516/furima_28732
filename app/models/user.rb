@@ -1,10 +1,10 @@
 class User < ApplicationRecord
+  has_many :items
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-
+         
          validates :nickname, :birthday, presence: true
          validates :password, confirmation: true, presence: true, length: { minimum: 6 },
                    # 英数字のみ可
