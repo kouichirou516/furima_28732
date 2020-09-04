@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
          validates :first_name_kana, :last_name_kana, presence: true, 
                    # カナのみ可
-                   format: { with: /\A([ァ-ン]|ー)+\z/, message: " Full-width katakana characters" }
+                   format: { with: /\A([ァ-ン]|ー)+\z/, message: "Full-width katakana characters" }
                    has_many :sns_credentials
    
 end
