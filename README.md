@@ -31,6 +31,7 @@
 | sale_charge     | integer | null: false |
 | shipping_charge | integer | null: false |
 | area            | integer [ null: false |
+| shipping_time   | integer | null: false |
 | user_id         | integer | null: false , foreign_key: true |
 ### Association
 

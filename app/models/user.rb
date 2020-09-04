@@ -1,10 +1,10 @@
 class User < ApplicationRecord
+  has_many :items
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-
+         
          validates :nickname, :birthday, presence: true
          validates :password, confirmation: true, presence: true, length: { minimum: 6 },
                    # 英数字のみ可
@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
          validates :first_name_kana, :last_name_kana, presence: true, 
                    # カナのみ可
-                   format: { with: /\A([ァ-ン]|ー)+\z/, message: " Full-width katakana characters" }
+                   format: { with: /\A([ァ-ン]|ー)+\z/, message: "Full-width katakana characters" }
                    has_many :sns_credentials
    
 end
