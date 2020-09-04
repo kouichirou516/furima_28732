@@ -54,10 +54,22 @@ describe Item do
         expect(@item.errors.full_messages).to include("Category is not a number")
       end
 
+      it "category_idが--だと出品できない" do
+        @item.category_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+
       it "status_idがないと出品できない" do
         @item.status_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Status is not a number")
+      end
+
+      it "status_idが--だと出品できない" do
+        @item.status_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
 
       it "priceがないと出品できない" do
@@ -90,16 +102,34 @@ describe Item do
         expect(@item.errors.full_messages).to include("Shipping charge is not a number")
       end
 
+      it "shipping_charge_idが--だと出品できない" do
+        @item.shipping_charge_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping charge must be other than 1")
+      end
+
       it "area_idがないと出品できない" do
         @item.area_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Area is not a number")
       end
 
+      it "area_idが--だと出品できない" do
+        @item.area_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area must be other than 1")
+      end
+
       it "shipping_time_idがないと出品できない" do
         @item.shipping_time_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping time is not a number")
+      end
+
+      it "shipping_time_idが--だと出品できない" do
+        @item.shipping_time_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping time must be other than 1")
       end
 
     end
