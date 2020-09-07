@@ -128,8 +128,9 @@
      
     <ul class='item-lists'>
         <% @items.each do |item| %>
-
+        
       <li class='list'>
+      <%= link_to item_path(item.id), method: :get do%> 
         <div class="item-img-content" style="background-image: url(<%= item.image %>);">
           <%= image_tag item.image.variant(resize:'300x300'), class: 'item-image' if item.image.attached?%>
 
@@ -152,7 +153,8 @@
           </div>
         </div>
       </li>
-        <% end %>
+      <% end %>
+      <% end %>
 
       <%# 商品がない場合のダミー %>
 
