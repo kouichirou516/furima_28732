@@ -6,6 +6,5 @@ Rails.application.routes.draw do
 
   # トップページの表示
   root to: 'items#index'
-  resources :items, only: [:index, :new, :create, :show, :edit, :update] do
-  end
+  resources :items, :except => :destroy 
 end
