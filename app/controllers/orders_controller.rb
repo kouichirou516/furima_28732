@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:index]
+  before_action :seller_redirect
   
   def index
     @order = OrderShippingAddress.new
@@ -19,7 +20,7 @@ class OrdersController < ApplicationController
       @order.save
       return redirect_to root_path
     else
-      render 'index'
+      render :index
     end
   end
 
@@ -38,5 +39,15 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency:'jpy'                 # 通貨の種類(日本円)
     )
+  end
+
+  def seller_redirect
+    #出品者が直接URLを打ち込み購入ページにアクセスした時トップページに戻る。
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user.id
+      redirect_to root_path
+    elsif !@item.order.nil?
+      redirect_to root_path
+    end
   end
 end
