@@ -7,6 +7,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :area
   belongs_to_active_hash :shipping_time
   has_one_attached :image
+  has_one :order
+
 
   #空の投稿を保存できないようにする
   validates :image, :name, :description, :category_id, :status_id, :shipping_charge_id, :area_id, :shipping_time_id, :price, presence: true
