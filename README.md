@@ -35,10 +35,10 @@
 | user_id         | integer | null: false , foreign_key: true |
 ### Association
 
-- has_one :purchase
+- has_one :order
 - belongs_to :user
 
-## purchase テーブル
+## orders テーブル
 
 | Colum           | Type    | Options     |
 | --------------  | ------- | null: false |
@@ -55,9 +55,9 @@
 
 | Colum           | Type    | Options     |
 | --------------  | ------- | null: false |
-| purchase        | references | null: false , foreign_key: true |
-| Prefectures     | string  | null: false |
-| postal_cord     | string  | null: false |
+| order_id        | references | null: false , foreign_key: true |
+| prefectures_id  | string  | null: false |
+| postal_code     | string  | null: false |
 | city            | string  | null: false |
 | address         | integer | null: false |
 | building        | string  | ----------- |
@@ -65,5 +65,5 @@
 
 ### Association
 
-- belongs_to :purchase
+- belongs_to :order
 
