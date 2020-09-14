@@ -29,6 +29,10 @@ const pay = () => {
  
       document.getElementById("charge-form").submit();
       document.getElementById("charge-form").reset();
+      } else{
+        alert(response.error.message);
+        const btn_field = document.getElementsByClassName("buy-red-btn")[0];
+        btn_field.disabled = false;
       }
       
     });
