@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :seller_redirect
+  before_action :set_item, only: [:index, :create]
   
   def index
     @order = OrderShippingAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   
@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
   def create
 
     @order = OrderShippingAddress.new(order_params)
-    @item = Item.find(params[:item_id])
     
     if @order.valid?
       pay_item
@@ -48,6 +47,10 @@ class OrdersController < ApplicationController
       redirect_to root_path
     elsif !@item.order.nil?
       redirect_to root_path
+    end
+
+    def set_item
+      @item = Item.find(params[:item_id])
     end
   end
 end
