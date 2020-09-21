@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_time
   has_one_attached :image
   has_one :order
+  has_many :comments, dependent: :destroy
 
 
   #空の投稿を保存できないようにする
