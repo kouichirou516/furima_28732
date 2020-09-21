@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :orders
+- has_many :comments, dependent: :destroy
 
 ## items テーブル
 
@@ -36,6 +37,7 @@
 ### Association
 
 - has_one :order
+- has_many :comments, dependent: :destroy
 - belongs_to :user
 
 ## orders テーブル
@@ -66,4 +68,24 @@
 ### Association
 
 - belongs_to :order
+
+## comment テーブル
+
+| Colum           | Type    | Options     |
+| --------------  | ------- | null: false |
+| item_id         | references | null: false , foreign_key: true |
+| user_id         | references | null: false , foreign_key: true |
+| delete_check    | ------- | ----------- |
+| comment         | ------- | ----------- |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+
+
+
+
+
+
 
