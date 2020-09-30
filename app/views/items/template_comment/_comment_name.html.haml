@@ -1,0 +1,5 @@
+.comment_user_name
+  = comment.user.nickname
+  - if comment.user ==  comment.item.user.id  # コメントユーザーと出品者が同じ場合
+    .item.user.id_display
+      出品者

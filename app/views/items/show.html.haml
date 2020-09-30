@@ -1,0 +1,119 @@
+= render "shared/header"
+.item-show
+  .item-box
+    %h2.name
+      = @item.name
+    .item-img-content
+      = image_tag @item.image.variant(resize:'500x500'), class: '@item-image' if @item.image.attached?
+      - if @item.order.present?
+        .sold-out
+          %span Sold Out!!
+    .item-price-box
+      %span.item-price
+        = @item.price
+        円
+        %br/
+      %span.item-postage
+        (税込) 送料込み
+    - if user_signed_in? && current_user.id == @item.user_id
+      = link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn"
+      %p.or-text or
+      = link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy'
+    - elsif @item.order == nil
+      = link_to '購入画面に進む', item_orders_path(@item), method: :get, class:"item-red-btn"
+    .item-explain-box
+      %span= "商品説明"
+    %table.detail-table
+      %tbody
+        %tr
+          %th.detail-item 出品者
+          %td.detail-value= @item.user.nickname
+        %tr
+          %th.detail-item カテゴリー
+          %td.detail-value= @item.category.name
+        %tr
+          %th.detail-item 商品の状態
+          %td.detail-value= @item.status.name
+        %tr
+          %th.detail-item 配送料の負担
+          %td.detail-value= @item.shipping_charge.name
+        %tr
+          %th.detail-item 発送元の地域
+          %td.detail-value= @item.area.name
+        %tr
+          %th.detail-item 発送日の目安
+          %td.detail-value= @item.shipping_time.name
+    .option
+      .favorite-btn
+        = image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"
+        %span お気に入り 0
+      .report-btn
+        = image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"
+        %span 不適切な商品の通報
+  .comment-box
+    .comment_list
+    
+      - if user_signed_in?
+        - @commentALL.each do |comment|
+          - if comment.user_id == current_user.id
+            -#   ===================================
+            -#   コメントユーザーとログインユーザーが同一の場合
+            -#   ===================================
+            .comment_Me.comment_one_block{data:{index: comment.id}}
+              - if comment.delete_check == 1   # 削除済の場合
+                .comment_content
+                  = render 'items/template_comment/comment_delete_restore_btn',comment: comment
+              - else   # 削除されていない場合
+                .comment_content
+                  = comment.comment
+                  .comment_create_at
+                    = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+                  - if comment.item.user.id == current_user.id
+                    .comment_delete.me_pre_delete{data:{index: comment.id}}
+                      = link_to '削除する', comment_path(comment.id) ,method: :patch
+              = render 'items/template_comment/comment_name',comment: comment
+          - else 
+            -#   ===================================
+            -#   コメントユーザーとログインユーザーが異なる場合の場合
+            -#   ===================================
+            .comment_Other.comment_one_block{data:{index: comment.id}}
+              = render 'items/template_comment/comment_name',comment: comment
+              - if comment.delete_check == 1   # 削除済の場合
+                .comment_content_other
+                  出品者によりこのコメントは削除されました。
+                  = render 'items/template_comment/comment_delete_restore_btn',comment: comment
+              - else    # 削除されていない場合
+                .comment_content_other
+                  = comment.comment
+                  .comment_create_at
+                    = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+                  - if comment.item.user.id == current_user   # 出品者とログインユーザーが等しい場合
+                    .comment_delete.other_pre_delete{data:{index: comment.id}}
+                      = link_to '削除する', comment_path(comment.id) ,method: :patch
+                              
+    -#   ===================================
+    -#   投稿フォーム
+    -#   ===================================
+    - if user_signed_in?
+      = form_with model:@comment ,class:"comment-box", local: true do |f|
+        = f.text_area :comment,id: "comment_body",class: "comment-text"
+        = f.hidden_field :item_id, value: @item.id
+
+        %p.comment-warn
+          相手のことを考え丁寧なコメントを心がけましょう。
+          %br/
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        %button.comment-btn{:type => "submit"}
+          = image_tag "comment.png" ,class:"comment-flag,comment-flag-icon",width:"20",height:"20"
+          %span
+            コメントする
+            %span
+  .links
+    %a.change-item-btn{:href => "#"}
+      ＜ 前の商品
+    %a.change-item-btn{:href => "#"}
+      後ろの商品 ＞
+  %a.another-item{:href => "#"}
+    = @item.category.name
+    をもっと見る
+= render "shared/footer"

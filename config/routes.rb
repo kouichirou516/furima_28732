@@ -9,5 +9,10 @@ Rails.application.routes.draw do
   resources :items do
     resources :orders, only:[:create, :index]
   end
+  resources :comments, only:[:create,:update,:destroy] do
+    member do
+      get 'restore'
+    end
+  end
 
 end

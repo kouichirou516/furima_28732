@@ -47,7 +47,7 @@ group :development, :test do
   gem 'capistrano-rails'
 
   gem 'capistrano3-unicorn'
-  
+
 end
 
 group :development do
@@ -88,3 +88,7 @@ gem 'image_processing', '~> 1.2'
 gem 'payjp'
 
 gem "aws-sdk-s3", require: false
+
+gem 'haml-rails'
+
+gem 'erb2haml'
